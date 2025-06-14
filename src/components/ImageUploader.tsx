@@ -1,7 +1,7 @@
-
 import { useState, useRef } from "react";
-import { Upload, Image } from "lucide-react";
 import { toast } from "sonner";
+import { Upload, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ImageUploaderProps {
   onImageUpload: (file: File) => void;
@@ -66,53 +66,68 @@ export const ImageUploader = ({ onImageUpload }: ImageUploaderProps) => {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Upload Image</h2>
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-medium text-slate-900">Upload Image</h2>
+      </div>
       
       <div
-        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${
-          isDragging
-            ? "border-purple-500 bg-purple-50/50 scale-105"
-            : "border-gray-300 hover:border-purple-400 hover:bg-purple-50/30"
-        }`}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onClick={handleClick}
+        className={cn(
+          "border-2 border-dashed rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.01] active:scale-[0.99]",
+          isDragging 
+            ? "border-blue-500 bg-blue-50/50 shadow-lg shadow-blue-500/10" 
+            : "border-slate-200 hover:border-blue-400 hover:bg-slate-50"
+        )}
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleFileInput}
-          className="hidden"
-        />
-        
-        <div className="flex flex-col items-center gap-4">
-          <div className={`p-4 rounded-full transition-colors duration-200 ${
-            isDragging ? "bg-purple-100" : "bg-gray-100"
-          }`}>
-            {isDragging ? (
-              <Upload className="w-8 h-8 text-purple-600" />
-            ) : (
-              <Image className="w-8 h-8 text-gray-600" />
-            )}
-          </div>
+        <div
+          className="p-8 text-center cursor-pointer"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onClick={handleClick}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileInput}
+            className="hidden"
+          />
           
-          <div>
-            <p className="text-lg font-medium text-gray-700 mb-1">
-              {isDragging ? "Drop image here" : "Choose or drag image"}
-            </p>
-            <p className="text-sm text-gray-500">
-              Supports PNG, JPEG, JPG, WebP, HEIC (max 10MB)
-            </p>
+          <div className="flex flex-col items-center gap-4">
+            <div 
+              className={cn(
+                "p-4 rounded-full transition-all duration-300",
+                isDragging 
+                  ? "bg-blue-100 shadow-md shadow-blue-200/50 animate-bounce" 
+                  : "bg-slate-100"
+              )}
+            >
+              {isDragging ? (
+                <Upload className="w-8 h-8 text-blue-600" />
+              ) : (
+                <Upload className="w-8 h-8 text-blue-600" />
+              )}
+            </div>
+            
+            <div>
+              <p className="text-lg font-medium text-slate-800 mb-2">
+                {isDragging ? "Drop image here" : "Drag and drop or click to upload"}
+              </p>
+              <p className="text-sm text-slate-500">
+                Supports PNG, JPEG, JPG, WebP, HEIC (max 10MB)
+              </p>
+            </div>
           </div>
         </div>
       </div>
       
-      <div className="mt-4 text-xs text-gray-500 space-y-1">
-        <p>• Minimum: 65,536 total pixels</p>
-        <p>• Maximum after scaling: 16,777,216 pixels</p>
+      <div className="mt-4 flex items-start gap-2">
+        <Upload className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
+        <div className="text-xs text-slate-500 space-y-1">
+          <p>Minimum: 65,536 total pixels</p>
+          <p>Maximum after scaling: 16,777,216 pixels</p>
+        </div>
       </div>
     </div>
   );

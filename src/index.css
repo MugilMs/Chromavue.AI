@@ -16,17 +16,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 245 70% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 245 70% 50%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 245 70% 50%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -102,7 +102,7 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #9333ea, #3b82f6);
+  background: #4f46e5;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: 2px solid white;
@@ -112,7 +112,7 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #9333ea, #3b82f6);
+  background: #4f46e5;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: 2px solid white;
@@ -121,11 +121,11 @@
 .slider::-webkit-slider-track {
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #e5e7eb, #9333ea);
+  background: linear-gradient(90deg, #e5e7eb, #4f46e5);
 }
 
 .slider::-moz-range-track {
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #e5e7eb, #9333ea);
+  background: linear-gradient(90deg, #e5e7eb, #4f46e5);
 }

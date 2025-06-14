@@ -1,0 +1,56 @@
+// This script uses canvas to convert our SVG to PNG for favicon.ico
+const fs = require('fs');
+const { createCanvas, loadImage } = require('canvas');
+
+async function convertSvgToPng() {
+  try {
+    const canvas = createCanvas(64, 64);
+    const ctx = canvas.getContext('2d');
+    
+    // Create gradient background
+    const gradient = ctx.createLinearGradient(0, 0, 64, 64);
+    gradient.addColorStop(0, '#3b82f6');  // blue-500
+    gradient.addColorStop(1, '#4f46e5');  // indigo-600
+    
+    // Draw rounded rectangle background
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    const radius = 12;
+    ctx.moveTo(radius, 0);
+    ctx.lineTo(64 - radius, 0);
+    ctx.quadraticCurveTo(64, 0, 64, radius);
+    ctx.lineTo(64, 64 - radius);
+    ctx.quadraticCurveTo(64, 64, 64 - radius, 64);
+    ctx.lineTo(radius, 64);
+    ctx.quadraticCurveTo(0, 64, 0, 64 - radius);
+    ctx.lineTo(0, radius);
+    ctx.quadraticCurveTo(0, 0, radius, 0);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Draw "V" text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 36px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('V', 32, 32);
+    
+    // Add sparkle effect
+    ctx.fillStyle = '#ffffff';
+    ctx.globalAlpha = 0.8;
+    
+    // Small sparkle in top right
+    ctx.beginPath();
+    ctx.arc(48, 16, 2, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Save as PNG
+    const buffer = canvas.toBuffer('image/png');
+    fs.writeFileSync('public/favicon.ico', buffer);
+    console.log('Favicon created successfully!');
+  } catch (err) {
+    console.error('Error creating favicon:', err);
+  }
+}
+
+convertSvgToPng();

@@ -1,6 +1,12 @@
 
 import { EnhanceParams } from "@/pages/Index";
-import { Settings } from "lucide-react";
+import { Settings, Sliders, Sparkles, Wand2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ParameterControlsProps {
   params: EnhanceParams;
@@ -14,36 +20,35 @@ export const ParameterControls = ({ params, onParamsChange, onReset }: Parameter
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg">
+    <div>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <Settings className="w-5 h-5 text-purple-600" />
-          <h2 className="text-xl font-semibold text-gray-800">Enhancement Settings</h2>
+          <Sliders className="w-4 h-4 text-blue-600" />
+          <h2 className="text-lg font-medium text-slate-900">Enhancement Settings</h2>
         </div>
-        <button
-          onClick={onReset}
-          className="text-sm text-purple-600 hover:text-purple-700 font-medium"
-        >
-          Reset
-        </button>
       </div>
 
       <div className="space-y-6">
         {/* Scale Factor */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Scale Factor: {params.scale}x
-          </label>
-          <input
-            type="range"
-            min="1"
-            max="4"
-            step="1"
-            value={params.scale}
-            onChange={(e) => updateParam('scale', parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-          />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="text-sm font-medium text-slate-700">
+              Scale Factor
+            </Label>
+            <span className="text-sm font-medium text-blue-600">{params.scale}x</span>
+          </div>
+          <div className="pt-1">
+            <Slider
+              defaultValue={[params.scale]}
+              min={1}
+              max={4}
+              step={1}
+              value={[params.scale]}
+              onValueChange={(value) => updateParam('scale', value[0])}
+              className="w-full"
+            />
+          </div>
+          <div className="flex justify-between text-xs text-slate-500">
             <span>1x</span>
             <span>2x</span>
             <span>3x</span>
@@ -52,37 +57,55 @@ export const ParameterControls = ({ params, onParamsChange, onReset }: Parameter
         </div>
 
         {/* Enhancement Toggle */}
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-gray-700">
-            Enable Enhancement
-          </label>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={params.enhance}
-              onChange={(e) => updateParam('enhance', e.target.checked)}
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-          </label>
+        <div className="flex flex-row items-center justify-between rounded-lg border border-slate-200 p-3 shadow-sm">
+          <div className="space-y-0.5">
+            <Label className="text-sm font-medium text-slate-700">
+              AI Enhancement
+            </Label>
+            <p className="text-xs text-slate-500">
+              Apply AI-powered image enhancement
+            </p>
+          </div>
+          <Switch
+            checked={params.enhance}
+            onCheckedChange={(checked) => updateParam('enhance', checked)}
+            className="data-[state=checked]:bg-blue-600"
+          />
         </div>
 
         {/* Enhancement Creativity */}
         {params.enhance && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Enhancement Creativity: {params.enhanceCreativity.toFixed(2)}
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={params.enhanceCreativity}
-              onChange={(e) => updateParam('enhanceCreativity', parseFloat(e.target.value))}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Label className="text-sm font-medium text-slate-700">
+                  Creativity
+                </Label>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Wand2 className="h-3.5 w-3.5 text-slate-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="w-[200px] text-xs">Controls how creative the AI can be with enhancements</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+              <span className="text-sm font-medium text-blue-600">{params.enhanceCreativity.toFixed(2)}</span>
+            </div>
+            <div className="pt-1">
+              <Slider
+                defaultValue={[params.enhanceCreativity]}
+                min={0}
+                max={1}
+                step={0.01}
+                value={[params.enhanceCreativity]}
+                onValueChange={(value) => updateParam('enhanceCreativity', value[0])}
+                className="w-full"
+              />
+            </div>
+            <div className="flex justify-between text-xs text-slate-500">
               <span>Conservative</span>
               <span>Creative</span>
             </div>
@@ -91,44 +114,71 @@ export const ParameterControls = ({ params, onParamsChange, onReset }: Parameter
 
         {/* Enhancement Prompt */}
         {params.enhance && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Enhancement Prompt
-            </label>
-            <input
-              type="text"
-              value={params.enhancePrompt}
-              onChange={(e) => updateParam('enhancePrompt', e.target.value)}
-              placeholder="e.g., gold, marble, vintage, cinematic"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              Optional style guidance (e.g., materials, moods, artistic styles)
+          <div className="space-y-3">
+            <div className="flex items-center gap-1.5">
+              <Label className="text-sm font-medium text-slate-700">
+                Style Prompt
+              </Label>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Sparkles className="h-3.5 w-3.5 text-slate-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="w-[200px] text-xs">Optional style guidance for the AI enhancement</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            <div>
+              <Input
+                value={params.enhancePrompt}
+                onChange={(e) => updateParam('enhancePrompt', e.target.value)}
+                placeholder="e.g., gold, marble, vintage, cinematic"
+                className="w-full border-slate-200 focus-visible:ring-blue-500"
+              />
+            </div>
+            <p className="text-xs text-slate-500">
+              Describe materials, moods, or artistic styles
             </p>
           </div>
         )}
 
         {/* Replication */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Replication: {params.replication.toFixed(2)}
-          </label>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={params.replication}
-            onChange={(e) => updateParam('replication', parseFloat(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-          />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <Label className="text-sm font-medium text-slate-700">
+                Detail Preservation
+              </Label>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Settings className="h-3.5 w-3.5 text-slate-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="w-[200px] text-xs">Controls how much of the original image details are preserved</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            <span className="text-sm font-medium text-blue-600">{params.replication.toFixed(2)}</span>
+          </div>
+          <div className="pt-1">
+            <Slider
+              defaultValue={[params.replication]}
+              min={0}
+              max={1}
+              step={0.01}
+              value={[params.replication]}
+              onValueChange={(value) => updateParam('replication', value[0])}
+              className="w-full"
+            />
+          </div>
+          <div className="flex justify-between text-xs text-slate-500">
             <span>Less Detail</span>
             <span>More Detail</span>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
-            Controls preservation of original image details and noise
-          </p>
         </div>
       </div>
     </div>

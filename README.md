@@ -1,73 +1,111 @@
-# Welcome to your Lovable project
+# Chromavue.AI - Premium Image Enhancement Platform
 
-## Project info
+![Chromavue.AI Logo](/public/logo.svg)
 
-**URL**: https://lovable.dev/projects/e5a6d6ea-e159-43d2-9d81-495a576da854
+Chromavue.AI is a professional-grade image enhancement platform powered by cutting-edge AI technology. Our platform enables photographers, designers, and creative professionals to transform ordinary images into stunning visuals that clients will happily pay premium rates for.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **AI-Powered Detail Enhancement**: Restore lost details and enhance fine textures
+- **Smart Upscaling**: Upscale images up to 16x without quality loss
+- **Professional Color Grading**: Apply industry-standard color presets
+- **Noise Reduction**: Intelligently remove noise while preserving details
+- **Background Replacement**: Automatically detect and replace backgrounds
+- **Client Presentation Mode**: Create beautiful side-by-side comparisons
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e5a6d6ea-e159-43d2-9d81-495a576da854) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js (v16 or higher)
+- npm or yarn
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/chromavue-ai.git
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# Navigate to the project directory
+cd chromavue-ai
 
-Follow these steps:
+# Install dependencies
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Project Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+├── public/              # Static assets
+├── src/                 # Source files
+│   ├── components/      # Reusable components
+│   ├── pages/           # Page components
+│   ├── lib/             # Utility functions
+│   └── App.tsx          # Main application component
+└── index.html          # Entry HTML file
+```
 
-**Use GitHub Codespaces**
+## Pricing Plans
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Chromavue.AI offers several pricing tiers to meet different needs:
 
-## What technologies are used for this project?
+### Free Tier
+- 5 image enhancements per month
+- Up to 2x upscaling
+- Basic enhancement features
+- Watermarked outputs
+
+### Pro Tier ($19.99/month)
+- 100 image enhancements per month
+- Up to 4x upscaling
+- Advanced enhancement features
+- No watermarks
+- Client presentation mode
+
+### Business Tier ($49.99/month)
+- Unlimited image enhancements
+- Up to 16x upscaling
+- All enhancement features + exclusive filters
+- Team collaboration (up to 5 users)
+- Commercial usage rights
+
+### Enterprise Tier (Custom pricing)
+- Custom AI model training
+- On-premise deployment options
+- Full white-label solution
+- Custom feature development
+
+## Deployment
+
+To build the application for production:
+
+```bash
+# Generate a production build
+npm run build
+
+# Preview the production build locally
+npm run preview
+```
+
+The built files will be in the `dist` directory, ready to be deployed to any static hosting service.
+
+## Technologies Used
 
 This project is built with:
 
 - Vite
 - TypeScript
 - React
-- shadcn-ui
 - Tailwind CSS
+- React Router
 
-## How can I deploy this project?
+## Contributing
 
-Simply open [Lovable](https://lovable.dev/projects/e5a6d6ea-e159-43d2-9d81-495a576da854) and click on Share -> Publish.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+© 2025 Chromavue.AI - All Rights Reserved
