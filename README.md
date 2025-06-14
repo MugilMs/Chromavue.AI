@@ -1,5 +1,7 @@
 # Chromavue.AI - Premium Image Enhancement Platform
 
+[![Chromavue.AI](https://img.shields.io/badge/Live%20Demo-Chromavue.AI-4285F4?style=for-the-badge&logo=vercel)](https://chromavue-ai.vercel.app/)
+
 ![Chromavue.AI Logo](/public/logo.svg)
 
 Chromavue.AI is a professional-grade image enhancement platform powered by cutting-edge AI technology. Our platform enables photographers, designers, and creative professionals to transform ordinary images into stunning visuals that clients will happily pay premium rates for.
